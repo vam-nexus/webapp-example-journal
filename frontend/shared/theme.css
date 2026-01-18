@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+
+:root {
+  --sunrise: #ffb35c;
+  --sunset: #ffb86b;
+  --apricot: #ffd6a3;
+  --peach: #ffe9cf;
+  --butter: #fff1d9;
+  --cream: #fffaf4;
+  --sky: #e8f4ff;
+  --mint: #dff3e4;
+  --cocoa: #4c2b1b;
+  --ink: #3d2a22;
+  --berry: #c26653;
+  --leaf: #4d7f57;
+  --shadow: rgba(61, 42, 34, 0.12);
+}
+
+body {
+  font-family: "Nunito", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+}

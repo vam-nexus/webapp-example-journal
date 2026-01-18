@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     frontend_web_dist: str = "frontend/web/dist"
     frontend_app_dist: str = "frontend/app/dist"
 
+    frontend_web_dev_url: str | None = None
+    frontend_app_dev_url: str | None = None
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

@@ -1,16 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
-
-:root {
-  --sunset: #ffb86b;
-  --apricot: #ffd6a3;
-  --butter: #fff1d9;
-  --mint: #dff3e4;
-  --ink: #3d2a22;
-  --berry: #c26653;
-  --leaf: #4d7f57;
-  --cream: #fffaf4;
-  --shadow: rgba(61, 42, 34, 0.12);
-}
+@import "../../../shared/theme.css";
 
 * {
   box-sizing: border-box;
@@ -18,7 +6,6 @@
 
 body {
   margin: 0;
-  font-family: "Nunito", "Trebuchet MS", sans-serif;
   color: var(--ink);
   background: radial-gradient(circle at top, var(--butter), var(--cream));
 }
