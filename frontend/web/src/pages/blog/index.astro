@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+
+// Get all blog posts and sort by date (newest first)
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Calculate read time (rough estimate: 200 words per minute)
+function calculateReadTime(content: string): string {
+  const wordsPerMinute = 200;
+  const wordCount = content.split(/\s+/).length;
+  const minutes = Math.ceil(wordCount / wordsPerMinute);
+  return `${minutes} min read`;
+}
+---
+
+<BaseLayout 
+  title="Blog - Journal App"
+  description="Discover tips, insights, and inspiration for your journaling practice. Learn about the benefits of reflection and personal growth."
+>
+  <!-- Hero Section -->
+  <section class="blog-hero">
+    <div class="blog-hero-container">
+      <h1 class="blog-hero-title">The Journal App Blog</h1>
+      <p class="blog-hero-subtitle">
+        Tips, insights, and inspiration for your journaling practice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Grid -->
+  <section class="blog-grid-section section-padding">
+    <div class="container">
+      {sortedPosts.length === 0 ? (
+        <p class="no-posts">No blog posts yet. Check back soon!</p>
+      ) : (
+        <div class="grid grid-3">
+          {sortedPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.description}
+              date={post.data.date}
+              slug={post.slug}
+              readTime={calculateReadTime(post.body)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="blog-cta-section section-padding-sm">
+    <div class="container-narrow">
+      <div class="blog-cta-box">
+        <h2 class="blog-cta-title">Ready to start journaling?</h2>
+        <p class="blog-cta-text">
+          Put these insights into practice with Journal App.
+        </p>
+        <a href="/app" class="btn btn-primary">Start Your Free Journal</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-hero {
+    background: linear-gradient(135deg, var(--apricot), var(--sky));
+    padding: 5rem 1.5rem 4rem;
+    text-align: center;
+    margin-top: -1rem;
+  }
+
+  .blog-hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog-hero-title {
+    font-size: clamp(2.5rem, 4vw + 1rem, 4rem);
+    font-weight: 800;
+    color: var(--cocoa);
+    margin: 0 0 1rem 0;
+  }
+
+  .blog-hero-subtitle {
+    font-size: clamp(1.125rem, 2vw + 0.5rem, 1.375rem);
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .blog-grid-section {
+    background: var(--cream);
+  }
+
+  .no-posts {
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--ink);
+    padding: 3rem 0;
+  }
+
+  .blog-cta-section {
+    background: var(--butter);
+  }
+
+  .blog-cta-box {
+    text-align: center;
+    background: linear-gradient(135deg, var(--sunset), var(--berry));
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    box-shadow: 0 12px 32px rgba(76, 43, 27, 0.15);
+  }
+
+  .blog-cta-title {
+    font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+    font-weight: 800;
+    color: white;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .blog-cta-text {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 1.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .blog-hero {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .blog-cta-box {
+      padding: 2.5rem 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,239 @@
+/* Global Styles for Marketing Website */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography Scale */
+.text-xs { font-size: 0.75rem; line-height: 1.5; }
+.text-sm { font-size: 0.875rem; line-height: 1.5; }
+.text-base { font-size: 1rem; line-height: 1.6; }
+.text-lg { font-size: 1.125rem; line-height: 1.6; }
+.text-xl { font-size: 1.25rem; line-height: 1.5; }
+.text-2xl { font-size: 1.5rem; line-height: 1.4; }
+.text-3xl { font-size: 1.875rem; line-height: 1.3; }
+.text-4xl { font-size: 2.25rem; line-height: 1.2; }
+.text-5xl { font-size: 3rem; line-height: 1.1; }
+
+/* Container Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-narrow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Spacing Utilities */
+.section-padding {
+  padding: 5rem 0;
+}
+
+.section-padding-sm {
+  padding: 3rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 3rem 0;
+  }
+  
+  .section-padding-sm {
+    padding: 2rem 0;
+  }
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--leaf), #5a9764);
+  color: white;
+  box-shadow: 0 12px 24px rgba(77, 127, 87, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(77, 127, 87, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--sunrise), var(--sunset));
+  color: var(--cocoa);
+  box-shadow: 0 12px 24px rgba(255, 179, 92, 0.3);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(255, 179, 92, 0.4);
+}
+
+.btn-ghost {
+  background: white;
+  color: var(--cocoa);
+  border: 2px solid rgba(76, 43, 27, 0.2);
+  box-shadow: 0 4px 12px rgba(76, 43, 27, 0.08);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(76, 43, 27, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76, 43, 27, 0.12);
+}
+
+/* Card Styles */
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid rgba(76, 43, 27, 0.1);
+  box-shadow: 0 8px 24px rgba(76, 43, 27, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(76, 43, 27, 0.12);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  color: var(--cocoa);
+}
+
+.card-content {
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* Grid Utilities */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 1.5rem;
+  }
+  
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(76, 43, 27, 0.1);
+}
+
+/* Link Styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+.link-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--berry);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.link-underline:hover {
+  text-decoration-color: var(--leaf);
+  opacity: 1;
+}
+
+/* Gradients */
+.gradient-warm {
+  background: linear-gradient(135deg, var(--apricot), var(--sky));
+}
+
+.gradient-sunset {
+  background: linear-gradient(135deg, var(--sunset), var(--berry));
+}
+
+.gradient-fresh {
+  background: linear-gradient(135deg, var(--mint), var(--sky));
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}

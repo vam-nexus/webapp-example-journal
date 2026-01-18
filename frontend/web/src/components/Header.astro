@@ -1,0 +1,195 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <a href="/" class="logo">
+      <span class="logo-icon">📔</span>
+      <span class="logo-text">Journal App</span>
+    </a>
+    
+    <nav class="main-nav">
+      <a href="/" class={currentPath === '/' ? 'nav-link active' : 'nav-link'}>Home</a>
+      <a href="/blog" class={currentPath.startsWith('/blog') ? 'nav-link active' : 'nav-link'}>Blog</a>
+      <a href="/app" class="nav-link nav-link-highlight">Open App</a>
+    </nav>
+
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <span class="hamburger"></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 250, 244, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(76, 43, 27, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--cocoa);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--cocoa);
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--leaf);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: var(--leaf);
+  }
+
+  .nav-link-highlight {
+    background: linear-gradient(135deg, var(--leaf), #5a9764);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(77, 127, 87, 0.2);
+  }
+
+  .nav-link-highlight::after {
+    display: none;
+  }
+
+  .nav-link-highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(77, 127, 87, 0.3);
+    opacity: 1;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--cocoa);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--cocoa);
+    transition: all 0.3s ease;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  @media (max-width: 768px) {
+    .main-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: rgba(255, 250, 244, 0.98);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(76, 43, 27, 0.08);
+      box-shadow: 0 8px 24px rgba(76, 43, 27, 0.1);
+    }
+
+    .main-nav.active {
+      display: flex;
+    }
+
+    .mobile-menu-toggle {
+      display: block;
+    }
+
+    .nav-link {
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('.main-nav');
+  
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  }
+</script>

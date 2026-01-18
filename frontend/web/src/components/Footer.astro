@@ -1,0 +1,164 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h3 class="footer-title">Journal App</h3>
+        <p class="footer-description">
+          Your personal space for reflection, growth, and clarity.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h4 class="footer-heading">Product</h4>
+        <ul class="footer-links">
+          <li><a href="/app">Open App</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/#features">Features</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4 class="footer-heading">Legal</h4>
+        <ul class="footer-links">
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4 class="footer-heading">Connect</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+          <a href="#" aria-label="GitHub" class="social-link">💻</a>
+          <a href="#" aria-label="Email" class="social-link">📧</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Journal App. Made with care and warmth.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: linear-gradient(135deg, var(--peach), var(--apricot));
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--cocoa);
+    margin: 0;
+  }
+
+  .footer-description {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .footer-heading {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--cocoa);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.95rem;
+    color: var(--ink);
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--leaf);
+    opacity: 1;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(76, 43, 27, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(76, 43, 27, 0.15);
+    opacity: 1;
+  }
+
+  .footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(76, 43, 27, 0.15);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    font-size: 0.875rem;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .site-footer {
+      padding: 2rem 0 1rem;
+      margin-top: 3rem;
+    }
+  }
+</style>
