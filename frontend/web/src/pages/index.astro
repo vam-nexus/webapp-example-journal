@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <div class="page">
+    <section class="hero">
+      <span class="badge">?? Mood-forward journaling</span>
+      <h1>Write it out. Warm up your day.</h1>
+      <p>
+        Journal App keeps your reflections gentle, organized, and bright. Capture
+        entries, track mood, and revisit the days that mattered most.
+      </p>
+      <div class="cta-row">
+        <a class="cta" href="/app">Open the Journal</a>
+        <a class="cta ghost" href="/api/public/health">Backend Health</a>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <strong>Soft landing</strong>
+          <p>Designed with warm gradients and friendly typography.</p>
+        </div>
+        <div class="feature">
+          <strong>Mood calendar</strong>
+          <p>See how your week is feeling at a glance.</p>
+        </div>
+        <div class="feature">
+          <strong>Private space</strong>
+          <p>Protected by JWT authentication for your entries.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer>Made to feel calm, clear, and quietly joyful.</footer>
+</BaseLayout>
