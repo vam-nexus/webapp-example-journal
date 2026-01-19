@@ -4,6 +4,7 @@ WORKDIR /app/frontend/web
 COPY frontend/web/package.json ./
 RUN npm install
 COPY frontend/web ./
+COPY frontend/shared /app/frontend/shared
 RUN npm run build
 
 FROM node:20-alpine AS app-build
@@ -13,6 +14,7 @@ COPY frontend/app/vite.config.ts ./
 COPY frontend/app/tsconfig.json ./
 RUN npm install
 COPY frontend/app ./
+COPY frontend/shared /app/frontend/shared
 RUN npm run build
 
 FROM python:3.11-slim AS backend

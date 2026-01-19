@@ -1,0 +1,125 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 891B done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 0.2s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:b6afd42430b15f2d2a4c5a02b919e98a525b785b1aaff16747d2f623364e39b6
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/node:20-alpine
+#4 DONE 0.2s
+
+#5 [internal] load metadata for docker.io/library/python:3.11-slim
+#5 DONE 0.2s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 165B done
+#6 DONE 0.0s
+
+#7 [backend 1/9] FROM docker.io/library/python:3.11-slim@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2
+#7 DONE 0.0s
+
+#8 [app-build 1/8] FROM docker.io/library/node:20-alpine@sha256:3960ed74dfe320a67bf8da9555b6bade25ebda2b22b6081d2f60fd7d5d430e9c
+#8 DONE 0.0s
+
+#9 [internal] load build context
+#9 transferring context: 3.90kB 0.0s done
+#9 DONE 0.0s
+
+#10 [app-build 6/8] RUN npm install
+#10 CACHED
+
+#11 [app-build 3/8] COPY frontend/app/package.json ./
+#11 CACHED
+
+#12 [app-build 5/8] COPY frontend/app/tsconfig.json ./
+#12 CACHED
+
+#13 [app-build 2/8] WORKDIR /app/frontend/app
+#13 CACHED
+
+#14 [app-build 4/8] COPY frontend/app/vite.config.ts ./
+#14 CACHED
+
+#15 [web-build 2/6] WORKDIR /app/frontend/web
+#15 CACHED
+
+#16 [backend 5/9] RUN uv sync --frozen --no-dev
+#16 CACHED
+
+#17 [backend 4/9] COPY pyproject.toml uv.lock ./
+#17 CACHED
+
+#18 [backend 6/9] COPY app ./app
+#18 CACHED
+
+#19 [backend 2/9] WORKDIR /app
+#19 CACHED
+
+#20 [backend 3/9] RUN pip install --no-cache-dir uv
+#20 CACHED
+
+#21 [app-build 7/8] COPY frontend/app ./
+#21 CACHED
+
+#22 [web-build 3/6] COPY frontend/web/package.json ./
+#22 CACHED
+
+#23 [backend 7/9] COPY .env ./
+#23 CACHED
+
+#24 [web-build 4/6] RUN npm install
+#24 CANCELED
+
+#25 [app-build 8/8] RUN npm run build
+#25 0.697 
+#25 0.697 > journal-app-ui@0.1.0 build
+#25 0.697 > vite build
+#25 0.697 
+#25 0.988 vite v7.3.1 building client environment for production...
+#25 1.060 transforming...
+#25 1.357 Unable to resolve `@import "../../../shared/theme.css"` from /app/frontend/app/src/styles
+#25 1.358 Γ£ô 15 modules transformed.
+#25 1.364 Γ£ù Build failed in 340ms
+#25 1.364 error during build:
+#25 1.364 [vite:css] [postcss] ENOENT: no such file or directory, open '../../../shared/theme.css'
+#25 1.364 file: /app/frontend/app/src/styles/app.css:undefined:NaN
+#25 1.364     at async open (node:internal/fs/promises:634:25)
+#25 1.364     at async Object.readFile (node:internal/fs/promises:1236:14)
+#25 1.364     at async Object.load (file:///app/frontend/app/node_modules/vite/dist/node/chunks/config.js:30091:19)
+#25 1.364     at async loadImportContent (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:401:19)
+#25 1.364     at async Promise.all (index 0)
+#25 1.364     at async resolveImportId (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:387:20)
+#25 1.364     at async parseStyles$1 (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:340:4)
+#25 1.364     at async Object.Once (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:465:20)
+#25 1.364     at async LazyResult.runAsync (/app/frontend/app/node_modules/postcss/lib/lazy-result.js:293:11)
+#25 1.364     at async runPostCSS (file:///app/frontend/app/node_modules/vite/dist/node/chunks/config.js:30145:19)
+#25 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+------
+ > [app-build 8/8] RUN npm run build:
+1.364     at async open (node:internal/fs/promises:634:25)
+1.364     at async Object.readFile (node:internal/fs/promises:1236:14)
+1.364     at async Object.load (file:///app/frontend/app/node_modules/vite/dist/node/chunks/config.js:30091:19)
+1.364     at async loadImportContent (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:401:19)
+1.364     at async Promise.all (index 0)
+1.364     at async resolveImportId (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:387:20)
+1.364     at async parseStyles$1 (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:340:4)
+1.364     at async Object.Once (file:///app/frontend/app/node_modules/vite/dist/node/chunks/postcss-import.js:465:20)
+1.364     at async LazyResult.runAsync (/app/frontend/app/node_modules/postcss/lib/lazy-result.js:293:11)
+1.364     at async runPostCSS (file:///app/frontend/app/node_modules/vite/dist/node/chunks/config.js:30145:19)
+------
+Dockerfile:16
+--------------------
+  14 |     RUN npm install
+  15 |     COPY frontend/app ./
+  16 | >>> RUN npm run build
+  17 |     
+  18 |     FROM python:3.11-slim AS backend
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/r8jvh6vajmkc6proy7900ccsg
