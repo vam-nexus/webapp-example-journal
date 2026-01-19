@@ -52,6 +52,8 @@ In dev, it proxies `/` and `/app` to the Astro/Vite dev servers when `FRONTEND_W
 For consistent routing, use `http://localhost:8000/` and `http://localhost:8000/app` in both dev and build.
 The Vite app is configured with `base: "/app/"`, so direct dev access is `http://localhost:5173/app/`.
 
+For Docker and CI, provide environment variables at runtime (the image does not bake in `.env`). Use `.env.example` as a template.
+
 ## API highlights
 - Public: `/api/public/health`, `/api/public/login?username=demo`
 - User: `/api/user/journal`, `/api/user/mood-calendar`, `/api/user/settings`
