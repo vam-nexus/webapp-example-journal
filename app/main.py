@@ -5,7 +5,7 @@ from typing import Dict
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 import httpx
 
@@ -23,6 +23,11 @@ app.add_middleware(
 )
 
 app.include_router(api_router)
+
+# Redirect /app to /app/ to handle trailing slash
+@app.get("/app")
+async def redirect_app():
+    return RedirectResponse(url="/app/", status_code=301)
 
 web_dist = Path(settings.frontend_web_dist)
 app_dist = Path(settings.frontend_app_dist)

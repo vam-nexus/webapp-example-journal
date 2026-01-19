@@ -4,6 +4,8 @@
 [![Docker Image](https://ghcr-badge.egpl.dev/vam-nexus/webapp-example-journal/latest_tag?trim=major&label=latest)](https://github.com/vam-nexus/webapp-example-journal/pkgs/container/webapp-example-journal)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+**Live Demo:** https://webapp-example-journal-latest.onrender.com/
+
 Warm, friendly journaling experience with a FastAPI backend, an Astro marketing site, and a React app.
 
 ## Screenshots
