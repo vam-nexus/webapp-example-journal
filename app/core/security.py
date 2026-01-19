@@ -22,6 +22,26 @@ DUMMY_USERS = {
     "admin": User(id="user-2", username="admin", is_admin=True),
 }
 
+# In-memory registry for OAuth users
+USER_REGISTRY: dict[str, User] = {}
+
+
+def create_or_update_user(email: str, name: str) -> User:
+    """Create or update a user from OAuth profile data."""
+    user_id = f"oauth-{email}"
+    
+    if user_id in USER_REGISTRY:
+        user = USER_REGISTRY[user_id]
+    else:
+        user = User(
+            id=user_id,
+            username=name or email.split("@")[0],
+            is_admin=False,
+        )
+        USER_REGISTRY[user_id] = user
+    
+    return user
+
 
 def create_access_token(user: User) -> str:
     expire_at = datetime.utcnow() + timedelta(minutes=settings.jwt_expire_minutes)

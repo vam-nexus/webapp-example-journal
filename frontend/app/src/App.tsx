@@ -101,6 +101,38 @@ export default function App() {
 
   const username = useMemo(() => user?.username ?? "demo", [user]);
 
+  // Handle OAuth callback
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenParam = params.get("token");
+    const errorParam = params.get("error");
+
+    if (tokenParam) {
+      // Decode the token to get user info
+      try {
+        const tokenParts = tokenParam.split(".");
+        if (tokenParts.length === 3) {
+          const payload = JSON.parse(atob(tokenParts[1]));
+          const user: User = {
+            id: payload.sub,
+            username: payload.username,
+            is_admin: payload.is_admin || false,
+          };
+          handleLogin(tokenParam, user);
+        }
+      } catch (err) {
+        setStatus(`OAuth login failed: ${String(err)}`);
+      }
+
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (errorParam) {
+      setStatus(`OAuth error: ${errorParam}`);
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   useEffect(() => {
     if (!token) return;
 

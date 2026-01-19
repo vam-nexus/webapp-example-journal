@@ -28,6 +28,10 @@ class Settings(BaseSettings):
     frontend_web_dev_url: str | None = None
     frontend_app_dev_url: str | None = None
 
+    google_client_id: str = ""
+    google_client_secret: str = ""
+    google_redirect_uri: str = "http://localhost:8000/auth/google/callback"
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def split_origins(cls, value: str | List[str]) -> List[str]:

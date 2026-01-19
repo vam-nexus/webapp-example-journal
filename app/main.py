@@ -7,6 +7,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.sessions import SessionMiddleware
 import httpx
 
 from app.api.router import router as api_router
@@ -22,7 +23,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add session middleware for OAuth
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=settings.jwt_secret,  # Use JWT secret for session encryption
+)
+
 app.include_router(api_router)
+
+# Mount auth router directly at /auth to match Google OAuth redirect URI
+from app.api.auth import router as auth_router
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
 
 # Redirect /app to /app/ to handle trailing slash
 @app.get("/app")
