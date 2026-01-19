@@ -2,6 +2,12 @@
 
 Warm, friendly journaling experience with a FastAPI backend, an Astro marketing site, and a React app.
 
+## Screenshots
+
+![Desktop View](docs/screen1.jpg)
+![Mobile View](docs/screen2.jpg)
+
+
 ## Stack
 - Backend: FastAPI (`app/main.py`)
 - Web: Astro (`frontend/web`)
