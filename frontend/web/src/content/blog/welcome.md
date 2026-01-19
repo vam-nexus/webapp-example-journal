@@ -2,11 +2,14 @@
 title: "Welcome to Journal App - Your Personal Reflection Space"
 description: "Discover how Journal App can transform your daily routine into a mindful practice of self-reflection and growth."
 date: "2026-01-15"
+image: "/images/blog/welcome-header.png"
 author: "Journal App Team"
 tags: ["welcome", "getting-started", "journaling"]
 ---
 
 # Welcome to Journal App
+
+<img src="/images/blog/welcome.png" class="content-illustration" alt="A welcoming open door" />
 
 We're thrilled to have you here! Whether you're new to journaling or a seasoned writer, Journal App is designed to make your reflection practice effortless, warm, and meaningful.
 

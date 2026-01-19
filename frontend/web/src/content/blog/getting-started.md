@@ -2,11 +2,14 @@
 title: "Getting Started with Your Journaling Practice"
 description: "A practical guide to building a sustainable journaling habit that fits your lifestyle and goals."
 date: "2026-01-08"
+image: "/images/blog/getting-started-header.png"
 author: "Journal App Team"
 tags: ["guide", "getting-started", "habits", "tips"]
 ---
 
 # Getting Started with Your Journaling Practice
+
+<img src="/images/blog/getting-started.png" class="content-illustration" alt="Journaling supplies on a desk" />
 
 Starting a journaling habit can feel overwhelming. What should you write about? How long should you write? What if you miss a day?
 

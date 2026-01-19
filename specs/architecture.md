@@ -33,3 +33,4 @@ Vite is configured with `base: "/app/"` so it serves under `/app` directly in de
 
 ## Environment
 - `.env` configures JWT, CORS, and frontend dist paths.
+- Unknown `.env` variables are ignored by the backend settings loader.

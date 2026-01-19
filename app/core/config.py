@@ -3,10 +3,16 @@ from __future__ import annotations
 from typing import List
 
 from pydantic import field_validator
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
     app_name: str = "journal-app"
     env: str = "dev"
 
@@ -21,10 +27,6 @@ class Settings(BaseSettings):
 
     frontend_web_dev_url: str | None = None
     frontend_app_dev_url: str | None = None
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
 
     @field_validator("cors_origins", mode="before")
     @classmethod

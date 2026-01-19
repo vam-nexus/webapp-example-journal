@@ -49,7 +49,7 @@ Ports:
 - Web: http://localhost:4321
 - App: http://localhost:5173
 
-The backend reads `.env` from the repo root for JWT secrets and CORS settings.
+The backend reads `.env` from the repo root for JWT secrets and CORS settings, and ignores unknown variables.
 In dev, it proxies `/` and `/app` to the Astro/Vite dev servers when `FRONTEND_WEB_DEV_URL` and `FRONTEND_APP_DEV_URL` are set.
 For consistent routing, use `http://localhost:8000/` and `http://localhost:8000/app` in both dev and build.
 The Vite app is configured with `base: "/app/"`, so direct dev access is `http://localhost:5173/app/`.

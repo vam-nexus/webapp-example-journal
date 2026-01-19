@@ -7,12 +7,19 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: "website" | "article";
 }
 
 const { 
   title = "Journal App - Your Personal Reflection Space",
-  description = "Write it out. Warm up your day. Journal App keeps your reflections gentle, organized, and bright."
+  description = "Write it out. Warm up your day. Journal App keeps your reflections gentle, organized, and bright.",
+  image = "/images/og-default.png",
+  type = "website"
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.href : "https://journal-app.com"; // Fallback URL
+const ogImage = new URL(image, siteUrl).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -23,9 +30,14 @@ const {
     <meta name="description" content={description} />
     
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📔</text></svg>" />

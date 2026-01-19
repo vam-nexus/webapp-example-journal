@@ -2,11 +2,14 @@
 title: "5 Science-Backed Benefits of Daily Journaling"
 description: "Explore the proven psychological and physical benefits of maintaining a regular journaling practice."
 date: "2026-01-12"
+image: "/images/blog/benefits-header.png"
 author: "Journal App Team"
 tags: ["health", "science", "benefits", "research"]
 ---
 
 # 5 Science-Backed Benefits of Daily Journaling
+
+<img src="/images/blog/benefits-journaling.png" class="content-illustration" alt="Plant growing in sunlight representing growth" />
 
 Journaling isn't just a pleasant pastime—it's a powerful tool backed by decades of psychological research. Here are five scientifically proven benefits of putting pen to paper (or fingers to keyboard) every day.
 
