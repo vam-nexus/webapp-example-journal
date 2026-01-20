@@ -10,8 +10,10 @@ Warm, friendly journaling experience with a FastAPI backend, an Astro marketing 
 
 ## Screenshots
 
-![Desktop View](docs/screen1.jpg)
-![Mobile View](docs/screen2.jpg)
+<p align="center">
+  <img src="docs/screen1.jpg" width="43%" alt="App View" />
+  <img src="docs/screen2.jpg" width="50%" alt="Site View" />
+</p>
 
 
 ## Stack
