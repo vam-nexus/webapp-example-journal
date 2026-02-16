@@ -49,12 +49,12 @@ type Tab = "new" | "history" | "calendar" | "settings";
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
-export async function apiFetch<T>(path: string, token?: string, init?: RequestInit): Promise<T> {
+export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
     ...init,
+    credentials: 'include',  // Send cookies with requests
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(init?.headers ?? {})
     }
   });
@@ -70,7 +70,6 @@ import Login from "./components/Login";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>("new");
-  const [token, setToken] = useState<string>("");
   const [user, setUser] = useState<User | null>(null);
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [calendar, setCalendar] = useState<MoodDay[]>([]);
@@ -87,6 +86,7 @@ export default function App() {
   const [isRecording, setIsRecording] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [status, setStatus] = useState<string>("");
+  const [loading, setLoading] = useState(true);
   const recognitionRef = useRef<any>(null);
   const baseTextRef = useRef(""); // Store text before recording starts
 
@@ -101,14 +101,42 @@ export default function App() {
 
   const username = useMemo(() => user?.username ?? "demo", [user]);
 
+  // Check for existing session on mount
   useEffect(() => {
-    if (!token) return;
+    const checkAuth = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const errorParam = params.get("error");
+
+      if (errorParam) {
+        setStatus(`OAuth error: ${errorParam}`);
+        window.history.replaceState({}, document.title, window.location.pathname);
+        setLoading(false);
+        return;
+      }
+
+      // Check if user is already logged in via cookie
+      try {
+        const result = await apiFetch<{ user: User }>("/api/user/me");
+        setUser(result.user);
+      } catch (err) {
+        // Not logged in, that's fine
+        console.log("No active session");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (!user) return;
 
     const load = async () => {
       try {
-        const list = await apiFetch<{ items: JournalEntry[] }>("/api/user/journal", token);
-        const moodDays = await apiFetch<{ days: MoodDay[] }>("/api/user/mood-calendar", token);
-        const userSettings = await apiFetch<Settings>("/api/user/settings", token);
+        const list = await apiFetch<{ items: JournalEntry[] }>("/api/user/journal");
+        const moodDays = await apiFetch<{ days: MoodDay[] }>("/api/user/mood-calendar");
+        const userSettings = await apiFetch<Settings>("/api/user/settings");
 
         setEntries(list.items);
         setCalendar(moodDays.days);
@@ -119,16 +147,19 @@ export default function App() {
     };
 
     load();
-  }, [token]);
+  }, [user]);
 
-  const handleLogin = (newToken: string, newUser: User) => {
-    setToken(newToken);
+  const handleLogin = (newUser: User) => {
     setUser(newUser);
     setStatus("");
   };
 
-  const handleLogout = () => {
-    setToken("");
+  const handleLogout = async () => {
+    try {
+      await apiFetch("/api/user/logout", { method: "POST" });
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
     setUser(null);
     setEntries([]);
     setCalendar([]);
@@ -137,18 +168,18 @@ export default function App() {
   };
 
   const saveEntry = async () => {
-    if (!token || !entryText.trim()) return;
+    if (!user || !entryText.trim()) return;
 
     setSaving(true);
     try {
-      const result = await apiFetch<{ item: JournalEntry }>("/api/user/journal", token, {
+      const result = await apiFetch<{ item: JournalEntry }>("/api/user/journal", {
         method: "POST",
         body: JSON.stringify({ text: entryText, mood })
       });
       setEntries((prev) => [result.item, ...prev]);
       setEntryText("");
       setStatus("Entry saved. Nice work.");
-      const moodDays = await apiFetch<{ days: MoodDay[] }>("/api/user/mood-calendar", token);
+      const moodDays = await apiFetch<{ days: MoodDay[] }>("/api/user/mood-calendar");
       setCalendar(moodDays.days);
       setActiveTab("history");
     } catch (error) {
@@ -159,10 +190,10 @@ export default function App() {
   };
 
   const updateSettings = async () => {
-    if (!token) return;
+    if (!user) return;
 
     try {
-      const next = await apiFetch<Settings>("/api/user/settings", token, {
+      const next = await apiFetch<Settings>("/api/user/settings", {
         method: "PUT",
         body: JSON.stringify(settings)
       });
@@ -173,7 +204,13 @@ export default function App() {
     }
   };
 
-  if (!token) {
+  if (loading) {
+    return <div className="app-shell" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div>Loading...</div>
+    </div>;
+  }
+
+  if (!user) {
     return <Login onLogin={handleLogin} />;
   }
 
