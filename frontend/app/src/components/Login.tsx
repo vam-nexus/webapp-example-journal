@@ -2,7 +2,7 @@ import { useState } from "react";
 import { User, apiFetch } from "../App";
 
 type LoginProps = {
-    onLogin: (token: string, user: User) => void;
+    onLogin: (user: User) => void;
 };
 
 export default function Login({ onLogin }: LoginProps) {
@@ -18,12 +18,11 @@ export default function Login({ onLogin }: LoginProps) {
         setError("");
 
         try {
-            const result = await apiFetch<{ access_token: string; user: User }>(
+            const result = await apiFetch<{ user: User }>(
                 `/api/public/login?username=${encodeURIComponent(username)}`,
-                undefined,
                 { method: "POST" }
             );
-            onLogin(result.access_token, result.user);
+            onLogin(result.user);
         } catch (err) {
             setError(`Login failed: ${String(err)}`);
         } finally {

@@ -58,9 +58,21 @@ async def google_callback(request: Request):
         # Generate JWT token
         jwt_token = create_access_token(user)
         
-        # Redirect to frontend with token
+        # Redirect to frontend and set httpOnly cookie
         frontend_url = settings.frontend_app_dev_url or "/app"
-        return RedirectResponse(url=f"{frontend_url}?token={jwt_token}")
+        response = RedirectResponse(url=frontend_url)
+        
+        # Set JWT in httpOnly cookie
+        response.set_cookie(
+            key="access_token",
+            value=jwt_token,
+            httponly=True,
+            secure=settings.env == "prod",  # HTTPS only in production
+            samesite="lax",
+            max_age=settings.jwt_expire_minutes * 60,  # Convert minutes to seconds
+        )
+        
+        return response
         
     except Exception as e:
         # Redirect to frontend with error

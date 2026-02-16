@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 
+from app.core.config import settings
 from app.core.security import User, get_current_user
 from app.models.journal import (
     JournalEntryCreate,
@@ -12,6 +13,24 @@ from app.models.journal import (
 from app.services.journal_service import journal_service
 
 router = APIRouter()
+
+
+@router.get("/me")
+async def get_me(user: User = Depends(get_current_user)) -> dict:
+    """Get current user info from cookie."""
+    return {"user": user.model_dump()}
+
+
+@router.post("/logout")
+async def logout(response: Response) -> dict:
+    """Logout by clearing the auth cookie."""
+    response.delete_cookie(
+        key="access_token",
+        httponly=True,
+        secure=settings.env == "prod",
+        samesite="lax",
+    )
+    return {"message": "Logged out"}
 
 
 @router.get("/journal", response_model=JournalListResponse)
