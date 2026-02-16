@@ -27,7 +27,10 @@ oauth.register(
 @router.get("/google/login")
 async def google_login(request: Request):
     """Initiate Google OAuth flow."""
-    redirect_uri = settings.google_redirect_uri
+    # Build redirect URI from the request's base URL
+    # This works in both dev (localhost) and production (actual domain)
+    base_url = str(request.base_url).rstrip("/")
+    redirect_uri = f"{base_url}/auth/google/callback"
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 
